@@ -1,41 +1,43 @@
 
 const webpack = require('webpack');
+const path = require('path');
 
-module.exports = {
-  entry: [
-    'react-hot-loader/patch',
-    './src/client/index.js'
-  ],
-  module: {
+const BUILD_DIR = path.resolve(__dirname, './dist');
+const APP_DIR = path.resolve(__dirname, './src/client');
+
+const config = {
+   entry: {
+     main: APP_DIR + '/index.js'
+   },
+   output: {
+     filename: 'bundle.js',
+     path: BUILD_DIR,
+   },
+   devtool: 'source-map',
+   module: {
     rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: ['babel-loader']
-      }
-    ]
-  },
-  resolve: {
-    extensions: ['*', '.js', '.jsx']
-  },
-  output: {
-    path: __dirname + '/dist',
-    publicPath: '/',
-    filename: 'bundle.js'
-  },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ],
-  devServer: {
-    contentBase: './dist',
-    hot: true,
+     {
+       test: /(\.css|.scss)$/,
+       use: [{
+           loader: "style-loader" // creates style nodes from JS strings
+       }, {
+           loader: "css-loader" // translates CSS into CommonJS
+       }, {
+           loader: "sass-loader" // compiles Sass to CSS
+       }]
+     },
+     {
+       test: /\.(jsx|js)?$/,
+       use: [{
+         loader: "babel-loader",
+         options: {
+           cacheDirectory: true
+         }
+       }]
+     }
+    ],
 
-    port: 3000, // Defaults to 8080
-    proxy: {
-      '^/*': {
-        target: 'http://localhost:3001/',
-        secure: false
-      }
-    }
   }
 };
+
+module.exports = config;
