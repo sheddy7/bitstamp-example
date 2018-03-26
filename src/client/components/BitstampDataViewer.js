@@ -1,6 +1,6 @@
 import React from 'react';
 
-const convertTimestamp = (timestamp) => {
+export const convertTimestamp = (timestamp) => {
   const d = new Date(timestamp * 1000);
 
   return d.toLocaleString();

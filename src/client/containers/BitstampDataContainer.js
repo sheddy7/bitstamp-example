@@ -32,6 +32,7 @@ class BitstampDataContainer extends Component {
       .catch(err => {
 
         this.setState({
+          data: null,
           error: err
         });
       });
