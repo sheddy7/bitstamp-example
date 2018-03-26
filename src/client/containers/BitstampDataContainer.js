@@ -28,13 +28,20 @@ class BitstampDataContainer extends Component {
         this.setState({
           data: resp
         });
+      })
+      .catch(err => {
+
+        this.setState({
+          error: err
+        });
       });
     }
   };
 
   render() {
     const tickerType = this.state.tickerType,
-      data = this.state.data;
+      data = this.state.data,
+      error =  this.state.error;
 
     return (
       <div>
@@ -45,6 +52,7 @@ class BitstampDataContainer extends Component {
         {data && <BitstampDataViewer
           data={data}
         />}
+        {error && <p>Failed to retrieve data. Please select another ticker to retry</p>}
       </div>
     );
   };

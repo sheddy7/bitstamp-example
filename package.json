@@ -6,7 +6,7 @@
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "server": "nodemon src/server/index.js --exec babel-node",
-    "client": "./node_modules/.bin/webpack -w",
+    "client": "./node_modules/.bin/webpack",
     "test": "mocha --compilers babel-core/register ./test/*test.js"
   },
   "keywords": [],

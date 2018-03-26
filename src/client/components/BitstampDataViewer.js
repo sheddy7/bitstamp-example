@@ -1,8 +1,10 @@
 import React from 'react';
-import Moment from 'react-moment';
 
-import IoArrowGraphUpRight from 'react-icons/lib/io/arrow-graph-up-right';
-import IoArrowGraphDownRight from 'react-icons/lib/io/arrow-graph-down-right';
+const convertTimestamp = (timestamp) => {
+  const d = new Date(timestamp * 1000);
+
+  return d.toLocaleString();
+};
 
 const BitstampDataViewer = (props) => {
 
@@ -29,11 +31,11 @@ const BitstampDataViewer = (props) => {
         <div className="data-right">{last}</div>
       </div>
       <div className="data-row">
-        <div className="data-left"><IoArrowGraphUpRight /> Last 24 hours price high</div>
+        <div className="data-left">Last 24 hours price high</div>
         <div className="data-right">{high}</div>
       </div>
       <div className="data-row">
-        <div className="data-left"><IoArrowGraphDownRight /> Last 24 hours price low</div>
+        <div className="data-left">Last 24 hours price low</div>
         <div className="data-right">{low}</div>
       </div>
       <div className="data-row">
@@ -54,7 +56,7 @@ const BitstampDataViewer = (props) => {
       </div>
       <div className="data-row">
         <div className="data-left">Date and time</div>
-        <div className="data-right"><Moment unix>{timestamp}</Moment></div>
+        <div className="data-right">{convertTimestamp(timestamp)}</div>
       </div>
       <div className="data-row">
         <div className="data-left">First price of the day</div>
